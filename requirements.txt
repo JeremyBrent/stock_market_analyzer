@@ -1,0 +1,9 @@
+yfinance==0.2.3
+nltk
+textblob
+transformers
+torch==2.2.2
+scipy
+numpy==1.26.4
+ipython
+kaggle
