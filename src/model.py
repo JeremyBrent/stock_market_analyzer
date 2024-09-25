@@ -31,8 +31,8 @@ class Model:
         return output
 
     def _extract_results(self,
-                      model_output: transformers.modeling_outputs.SequenceClassifierOutput
-                      ) -> dict[str, float]:
+                         model_output: transformers.modeling_outputs.SequenceClassifierOutput
+                         ) -> dict[str, float]:
         """
 
         :param model_output:
