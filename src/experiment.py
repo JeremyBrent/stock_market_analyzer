@@ -191,6 +191,7 @@ class Experiment:
             return dict(results_dict)
 
         # If we are on cuda or mps
+        # TODO: remove limit
         for data in tqdm(self.fsa_ground_truth_data[:100], total=len(self.fsa_ground_truth_data)):
             results = self._fsa_experiment_inner(data=data)
             for model, count in results.items():
