@@ -1,4 +1,4 @@
-name: Submodule Unittests
+name: Unittests
 run-name: Automated Github action for Unittests - ${{ github.actor }}
 on:
   pull_request
