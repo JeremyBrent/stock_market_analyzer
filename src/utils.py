@@ -1,5 +1,6 @@
 import datetime as dt
 from src.consts import DATE_FORMAT
+from zoneinfo import ZoneInfo
 
 
 class Utils:
@@ -14,8 +15,8 @@ class Utils:
         :param timestamp:
         :return:
         """
-        # Convert to datetime object
-        original_date = dt.datetime.fromtimestamp(timestamp)
+        # Ensure datetime is in NY Timezone bc that's were the NYSE is located
+        original_date = dt.datetime.fromtimestamp(timestamp, tz=ZoneInfo("America/New_York"))
         dt_object = original_date
 
         # Define 4 PM as the time to compare against
