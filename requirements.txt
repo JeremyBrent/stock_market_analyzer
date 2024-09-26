@@ -3,7 +3,7 @@ nltk
 textblob
 transformers
 torch==2.2.2
-scipy
+scipy==1.13.1
 numpy==1.26.4
-ipython
-kaggle
+ipython==8.18.1
+pandas_ta==0.3.14b
