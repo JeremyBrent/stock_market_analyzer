@@ -108,25 +108,25 @@ class Experiment:
         # Only get the sentiment with the highest score
         return max(final_output, key=final_output.get)
 
-    def _fsa_text_blob(self, text: str, model: str) -> str:
+    def _fsa_text_blob(self, text: str, model_name: str) -> str:
         """
 
         :param text:
-        :param model: Not used in this method, but needed for design pattern
+        :param model_name: Not used in this method, but needed for design pattern
         :return:
         """
         polarity: float = TextBlob(text).sentiment.polarity
         sentiment: str = self._categorize_sentiment_range(polarity)
         return sentiment
 
-    def _fsa_nltk(self, text: str, model: str) -> str:
+    def _fsa_nltk(self, text: str, model_name: str) -> str:
         """
         This NLTK class uses VADER (Valence Aware Dictionary and sEntiment Reasoner),
         "a lexicon and rule-based sentiment analysis tool that is specifically attuned
         to sentiments expressed in social media" (https://github.com/cjhutto/vaderSentiment)
 
         :param text:
-        :param model: Not used in this method, but needed for design pattern
+        :param model_name: Not used in this method, but needed for design pattern
         :return:
         """
         result: dict[str, float] = SentimentIntensityAnalyzer().polarity_scores(text)
@@ -142,7 +142,7 @@ class Experiment:
         data_dict = collections.defaultdict(int)
 
         for model_name, model_info in self.models.items():
-            actual = model_info['method'](text=data['text'], model=model_name)
+            actual = model_info['method'](text=data['text'], model_name=model_name)
             if actual == data['sentiment']:
                 data_dict[model_name] += 1
 
