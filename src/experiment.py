@@ -14,26 +14,29 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 class Experiment:
 
     def __init__(self):
+
+        self.device: torch.device = self._get_device()
+
         # Storing models here so we do not have to instantiate them every time we maka prediction
         self.models = {
             'finbert': {
                 'method': self._fsa_bert_model,
                 'tokenizer': AutoTokenizer.from_pretrained('ProsusAI/finbert'),
-                'model': AutoModelForSequenceClassification.from_pretrained('ProsusAI/finbert')
+                'model': AutoModelForSequenceClassification.from_pretrained('ProsusAI/finbert').to(self.device)
             },
             'roberta': {
                 'method': self._fsa_bert_model,
                 'tokenizer': AutoTokenizer.from_pretrained(
                     'cardiffnlp/twitter-roberta-base-sentiment-latest'),
                 'model': AutoModelForSequenceClassification.from_pretrained(
-                    'cardiffnlp/twitter-roberta-base-sentiment-latest')
+                    'cardiffnlp/twitter-roberta-base-sentiment-latest').to(self.device)
             },
             'fin_roberta': {
                 'method': self._fsa_bert_model,
                 'tokenizer': AutoTokenizer.from_pretrained(
                     'soleimanian/financial-roberta-large-sentiment'),
                 'model': AutoModelForSequenceClassification.from_pretrained(
-                    'soleimanian/financial-roberta-large-sentiment')
+                    'soleimanian/financial-roberta-large-sentiment').to(self.device)
             },
             'textblob': {
                 'method': self._fsa_text_blob
@@ -52,6 +55,25 @@ class Experiment:
         except LookupError:
             nltk.download('vader_lexicon')
             print('Downloading vader')
+
+    @staticmethod
+    def _get_device() -> torch.device:
+        """
+
+        :return:
+        """
+        # If on an Apple Silicon Mac (M1/M2), Pytorch supports MPS Backend (Metal Performance Shaders)
+        if torch.backends.mps.is_available():
+            device = torch.device('mps')
+
+        # If machine has access to trad GPU
+        elif torch.cuda.is_available():
+            device = torch.device('cuda')
+
+        else:
+            device = torch.device('cpu')
+
+        return device
 
     @staticmethod
     def _get_fsa_ground_truth_data() -> list[dict[str, str]]:
@@ -94,7 +116,7 @@ class Experiment:
                                                       padding=True,
                                                       truncation=True,
                                                       return_tensors='pt',
-                                                      max_length=512)
+                                                      max_length=512).to(self.device)
         output = self.models[model_name]['model'](**tokens)
 
         # self.models[model]['model'].config.id2label.values() ~= ['pos', 'neg', 'neu']
@@ -153,15 +175,26 @@ class Experiment:
 
         :return:
         """
-        result_dict = collections.defaultdict(int)
+        results_dict = collections.defaultdict(int)
 
-        with Pool(CPU_COUNT) as p:
-            for data in tqdm(
-                p.imap(self._fsa_experiment_inner,
-                       self.fsa_ground_truth_data[:100],  # TODO: remove limit
-                       chunksize=PARALLEL_CHUNK_SIZE), total=len(self.fsa_ground_truth_data)
-            ):
-                for model, count in data.items():
-                    result_dict[model] += count
+        # If we only have cpu access, run experiments using parallel processing
+        if self.device.type == 'cpu':
+            with Pool(CPU_COUNT) as p:
+                for results in tqdm(
+                    p.imap(self._fsa_experiment_inner,
+                           self.fsa_ground_truth_data[:100],  # TODO: remove limit
+                           chunksize=PARALLEL_CHUNK_SIZE), total=len(self.fsa_ground_truth_data)
+                ):
+                    for model, count in results.items():
+                        results_dict[model] += count
 
-        return dict(result_dict)
+            return dict(results_dict)
+
+        # If we are on cuda or mps
+        for data in tqdm(self.fsa_ground_truth_data[:100], total=len(self.fsa_ground_truth_data)):
+            results = self._fsa_experiment_inner(data=data)
+            for model, count in results.items():
+                results_dict[model] += count
+
+        return dict(results_dict)
+
