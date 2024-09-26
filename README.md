@@ -55,7 +55,7 @@ from src.experiment import Experiment
 experimenter = Experiment()
 experimenter.fsa_experiment()
 ```
-This will run the models defined in `experimenter.fsa_models_to_test`. 
+This will run the models defined in `experimenter.models`. 
 
 I have implemented functionality that can run FSA experiments using CUDA, 
 MPS (if on Mac Silicon Chip) or parallel compute if on CPU. This allows the software decide 
@@ -65,7 +65,7 @@ would complete in about 30 minutes.
 
 ### Future Directions
 More FSA models can be experimented on. To include more models in the `Experiment` class, simply 
-add the model to `experimenter.fsa_models_to_test` and any new methods that are needed to run 
+add the model to `experimenter.models` and any new key-value pairs that are needed to run 
 inference with the new model. 
 
 Any new models should be replicated based on existing research found 
