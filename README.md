@@ -67,3 +67,12 @@ Any new models should be replicated based on existing research found
 
 We should also implement a more sophisticated metric for 
 measuring the performance of the FSA models. Currently, we are only using a raw accuracy. 
+
+# The Code Base
+Given the timeframe of the project, I put together a small, end-to-end project. Some of these end 
+to end features include unittests, CICD with Github actions, and environment creation with Make and
+requirements.txt.
+
+With more time, some things I would build upon would be, 
+expanding unittest portfolio would need to build out, and further developing the Github actions
+if we were deploying this model as a service
