@@ -70,8 +70,10 @@ measuring the performance of the FSA models. Currently, we are only using a raw 
 
 # The Code Base
 Given the timeframe of the project, I put together a small, end-to-end project. Some of these end 
-to end features include unittests, CICD with Github actions, and environment creation with Make and
-requirements.txt.
+to end features include unittests, CICD with Github actions, environment creation with Make and
+requirements.txt, and github branch protection rules found 
+[here](https://github.com/JeremyBrent/stock_market_analyzer/settings/branch_protection_rules/54816872)
+which require 1. PRs and 2. passing Github actions in order to update the main branch.
 
 With more time, some things I would build upon would be, 
 expanding unittest portfolio would need to build out, and further developing the Github actions
