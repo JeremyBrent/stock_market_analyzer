@@ -8,6 +8,22 @@ cd stock_market_analyzer
 make install
 ```
 
+# The Code Base
+Given the timeframe of the project, I put together a small, end-to-end project. Some of these end 
+to end features include unittests, CICD with Github actions, environment creation with Make and
+requirements.txt, and github branch protection rules found 
+[here](https://github.com/JeremyBrent/stock_market_analyzer/settings/branch_protection_rules/54816872)
+which require 1. PRs and 2. passing Github actions in order to update the main branch. Note, that 
+I didn't require approvers on the branch protection rule due to the fact that there is no one else 
+to review my code .... this would not be the case in a production environment and that would be 
+a rule in said production environment.
+
+With more time, some things I would build upon would be: 
+1. Added a comprehensive logging functionality, this is critical to production-worthy code
+2. Expanding unittest portfolio would need to build out
+3. Further developing the Github actions if we were deploying this model as a service
+
+
 # FSA
 
 ## Data
@@ -72,19 +88,4 @@ Any new models should be replicated based on existing research found
 [here](https://dl.acm.org/doi/10.1145/3649451#sec-4-4).
 
 We should also implement a more sophisticated metric for 
-measuring the performance of the FSA models. Currently, we are only using a raw accuracy. 
-
-# The Code Base
-Given the timeframe of the project, I put together a small, end-to-end project. Some of these end 
-to end features include unittests, CICD with Github actions, environment creation with Make and
-requirements.txt, and github branch protection rules found 
-[here](https://github.com/JeremyBrent/stock_market_analyzer/settings/branch_protection_rules/54816872)
-which require 1. PRs and 2. passing Github actions in order to update the main branch. Note, that 
-I didn't require approvers on the branch protection rule due to the fact that there is no one else 
-to review my code .... this would not be the case in a production environment and that would be 
-a rule in said production environment.
-
-With more time, some things I would build upon would be: 
-1. Added a comprehensive logging functionality, this is critical to production-worthy code
-2. Expanding unittest portfolio would need to build out
-3. Further developing the Github actions if we were deploying this model as a service
+measuring the performance of the FSA models. Currently, we are only using a raw accuracy.
