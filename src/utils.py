@@ -75,4 +75,5 @@ class Utils:
         else:
             device = torch.device('cpu')
 
+        print(f'Using {device}')
         return device
