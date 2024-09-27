@@ -44,8 +44,8 @@ class Data:
                 # TODO: remove early breakage -- added for testing purposes
                 if offset == 10:
                     break
-                    
-                # Create an path for the offset, we will aggregate when done.
+
+                # Create a path for the offset, we will aggregate when done.
                 offset_path = os.path.join(PROJECT_ROOT_PATH,
                                            'data',
                                            f'{offset}_{ticker}_news_training_data.pkl')
