@@ -3,7 +3,7 @@ software_path=.
 
 configure:
 	@# Create Python venv
-	python3 -m venv $(software_path)/$(venv)
+	python3.9 -m venv $(software_path)/$(venv)
 
 	@# Install requirements
 	$(software_path)/$(venv)/bin/pip3 install -r requirements.txt
