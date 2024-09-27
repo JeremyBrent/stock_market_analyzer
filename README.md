@@ -6,6 +6,7 @@
 git clone https://github.com/JeremyBrent/stock_market_analyzer.git
 cd stock_market_analyzer
 make install
+source ./venv/bin/activate
 ```
 
 # The Code Base
