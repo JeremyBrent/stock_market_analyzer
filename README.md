@@ -3,15 +3,15 @@
 
 # Install
 ```commandline
-git clone https://github.com/JeremyBrent/stock_market_analyzer.git
+git clone git@github.com:JeremyBrent/stock_market_analyzer.git
 cd stock_market_analyzer
 make install
 source ./venv/bin/activate
 ```
 
 This code has only be developed and tested on MacOS with python version 3.9.13.
-If you do not have python3.9 on your machine run the following to download it via brew (if you have any issues
-with brew, reference their [installation guide](https://docs.brew.sh/Installation):
+If you do not have python3.9 (`make install` will break) on your machine run the following to download it via
+brew (if you have any issues with brew, reference their [installation guide](https://docs.brew.sh/Installation):
 ```commandline
 if ! command -v brew &> /dev/null
 then
