@@ -111,7 +111,12 @@ set and the train set, etc.</p>
 thoroughly debugged. These models are currently commented out in `exp.pp_models` due to this. </p>
 
 ### Run
-To get the best model performing Price Prediction Model, run the following code: 
+
+#### Inference
+TODO: ADD SECTION HERE
+
+#### Experiment
+To run experiments to get the best model performing Price Prediction Model, run the following code: 
 ```python
 from src.experiment import Experiment
 exp = Experiment()
