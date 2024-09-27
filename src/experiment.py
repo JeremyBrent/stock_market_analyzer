@@ -316,7 +316,7 @@ class Experiment:
                 y_train=train_test_data['y_train'])
 
             # Predict and evaluate on test data
-            y_pred = self.model.pp_predict(best_model, features=train_test_data['x_test'])
+            y_pred = self.model.pp_predict(model=best_model, feature_data=train_test_data['x_test'])
             accuracy = self.model.pp_evaluate_model(y_pred=y_pred,
                                                     y_test=train_test_data['y_test'])
 

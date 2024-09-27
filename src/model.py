@@ -112,34 +112,34 @@ class Model:
 
     @staticmethod
     def pp_train(model,
-                 features: pd.DataFrame,
+                 feature_data: pd.DataFrame,
                  targets: pd.Series):
         """
         Train a model
 
         :param model: un-trained model
-        :param features: features to train on
+        :param feature_data: feature data to train on
         :param targets: targets to train on
         :return: trained model
         """
-        model.fit(features, targets)
+        model.fit(feature_data, targets)
         return model
 
     def pp_predict(self,
-                   features: pd.DataFrame,
+                   feature_data: pd.DataFrame,
                    model=None) -> pd.Series:
         """
         Predict price movement
 
         :param model: model object
-        :param features: features data
+        :param feature_data: features data
         :return: predictions
         """
         assert model or self.pp_model, "We need a model!"
 
         model = model if model else self.pp_model
 
-        predictions = model.predict(features)
+        predictions = model.predict(feature_data)
         return predictions
 
     @staticmethod
