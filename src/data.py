@@ -41,6 +41,10 @@ class Data:
             # determine if we needed more or less data)
             while data or data[0].get('date') < '2020-01-01':
 
+                # TODO: remove early breakage -- added for testing purposes
+                if offset == 10:
+                    break
+                    
                 # Create an path for the offset, we will aggregate when done.
                 offset_path = os.path.join(PROJECT_ROOT_PATH,
                                            'data',
