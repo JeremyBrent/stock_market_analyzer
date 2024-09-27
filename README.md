@@ -59,6 +59,9 @@ and VADER was discussed [here](https://dl.acm.org/doi/10.1145/3649451#sec-4-4-4)
 were two of the top performing models discussed in this literature review [Du et al. (2024)](https://dl.acm.org/doi/10.1145/3649451#tab3), 
 and Finbert was used as a top performer in this research [Xiao et al. (2023)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10403218/). 
 
+### Performance
+On a small test set, FinBert achieved 74% accuracy, Roberta achieved 62% accuracy, 
+FinRoberta achieved 70% accuracy, TextBlob achieved 52% accuracy, and NLTK achieved 47% accuracy.
 
 ### Run
 In order to run experiments to determine the most accurate FSA model on the ground truth data, defined 
@@ -97,12 +100,11 @@ The Price Prediction model is trained to perform a binary classification to dete
 price will end higher or lower for the given day. 
 
 ### Performance
-<p id="suspect-data">Our highest performing model was a RandomForestClassifier with a test accuracy score around 72%. 
+Our highest performing model was a RandomForestClassifier with a test accuracy score around 72%. 
 A pretty decent score consdering the scope of this project. However, this model performed 
-significantly better on the test set, almost 20% better, this can be seen in 
-`./experiments/experiments.csv`, which is suspect ... This 
+significantly better on the test set, almost 20% better, this can be seen in `./experiments/experiments.csv`, which is suspect ... This 
 will need to be investigated for data leakage, changes in data distributions between the test 
-set and the train set, etc.</p>
+set and the train set, etc.
 
 ### Features
 The current features of the model, and I talk more about feature extraction [below](#feature-extract),
@@ -156,7 +158,7 @@ and `src.Model.pp_extract_features()`
 to `exp.pp_models`
  
 3. Investigate significantly higher performance in RandomForest test set compared to train set 
-[mentioned above](#suspect-data)
+[mentioned above](#performance)
 
 4. We had issues running GridSearch on XGBoost and LGBoost where we getting the error: 
 `Process finished with exit code 139 (interrupted by signal 11: SIGSEGV).` This would need to be more 

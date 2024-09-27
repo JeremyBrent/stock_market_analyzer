@@ -66,6 +66,7 @@ class Experiment:
             'LogisitcRegression': {
                 'model': LogisticRegression(random_state=RANDOM_STATE),
                 'params': {
+                    # TODO: add more comprehensive grid search params
                     "C": np.logspace(-3, 3, 7),
                     "penalty": ["l1", "l2"]
                 },
