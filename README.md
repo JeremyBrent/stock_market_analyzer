@@ -9,7 +9,7 @@ make install
 source ./venv/bin/activate
 ```
 
-This code has only be developed and tested on MacOS with python version 3.9.13.
+This code has only be developed and tested on MacOS with python version 3.9.20.
 If you do not have python3.9 (`make install` will break) on your machine run the following to download it via
 brew (if you have any issues with brew, reference their [installation guide](https://docs.brew.sh/Installation):
 ```commandline
