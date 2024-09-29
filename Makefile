@@ -8,8 +8,6 @@ configure:
 	@# Install requirements
 	$(software_path)/$(venv)/bin/pip3 install -r requirements.txt
 
-
-
 test:
 	source $(software_path)/$(venv)/bin/activate; python3 --version; which python3
 
